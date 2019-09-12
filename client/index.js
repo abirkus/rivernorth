@@ -5,10 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store.js';
 import {Provider} from 'react-redux';
+import Root from './components/Root';
 
 ReactDOM.render(
 	<Provider store={store}>
-		<div>Hello, world!</div>
+		<Root />
 	</Provider>,
 	document.getElementById('app')
 );

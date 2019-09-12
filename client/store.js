@@ -4,8 +4,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import appReducer from './redux/reducer.js';
-console.log('INSIDE STORE');
-console.log(appReducer);
 
 const store = createStore(
 	appReducer,

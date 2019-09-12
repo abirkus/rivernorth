@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Greeting from './Greeting';
-
+require('babel-polyfill');
 import Dashboard from './Dashboard';
 import {fetchApartments} from '../redux/reducer.js';
 

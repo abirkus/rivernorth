@@ -13,7 +13,7 @@ export const setApts = apts => {
 export const fetchApartments = () => {
 	return async dispatch => {
 		try {
-			const {data} = await axios.get('/api');
+			const {data} = await axios.get('/api/apartments');
 			dispatch(setApts(data));
 		} catch (err) {
 			console.log('Error', err);

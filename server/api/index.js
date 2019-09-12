@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const Apartment = require('../db');
+const {Apartment} = require('../db');
 
-router.get('/', async (req, res, next) => {
+router.get('/apartments', async (req, res, next) => {
 	try {
-		const result = await Apartment.findAll({limit: 10});
+		const result = await Apartment.findAll({limit: 1});
 		res.json(result);
 	} catch (err) {
 		next(err);

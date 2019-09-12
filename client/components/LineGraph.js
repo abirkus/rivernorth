@@ -38,7 +38,7 @@ class LineGraph extends Component {
 				labels: labels2,
 				datasets: [
 					{
-						label: 'Bidder Profit',
+						label: `Bidder's Profit`,
 						data: profit,
 					},
 				],
@@ -50,7 +50,7 @@ class LineGraph extends Component {
 	}
 	render() {
 		return (
-			<div className='test'>
+			<div className='graphContainer'>
 				<canvas id='myChart' ref={this.chartRef} />
 			</div>
 		);

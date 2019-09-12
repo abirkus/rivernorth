@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'PT Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #6610f2;
+	color: white;
+}
+
+.topnav {
+	grid-area: header;
+}
+.root {
+	grid-area: main;
+}
+.sidebar {
+	grid-area: sidebar;
+}
+.item-d {
+	grid-area: footer;
+}
+
+.container {
+	display: grid;
+	width: 100vw;
+	height: 100vh;
+	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-rows: 5% 20% 25% 25% 25%;
+	grid-template-areas:
+		'header header header header'
+		'main main . sidebar'
+		'main main . sidebar'
+		'footer footer footer footer';
+	justify-content: center;
+	align-content: center;
+}
+
+.topnav {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	display: grid;
+	grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
+}
+
+.topnav a {
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.topnav a:hover {
+	background-color: rgb(169, 206, 255);
+	color: black;
+}
+
+.root {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 4;
+	align-items: stretch;
+}
+
+.greeting {
+	text-align: center;
+}
+
+.graphContainer {
+	/* width: 50vw;
+	height: 50vh; */
+	background: white;
+	padding: 30px 20px 10px 20px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+}
+
+@media only screen and (max-width: 600px) {
+	.graphContainer {
+		width: 80vw;
+	}
+}

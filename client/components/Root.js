@@ -18,13 +18,14 @@ class Root extends React.Component {
 	render() {
 		return (
 			<Router>
-				<div id='container'>
+				<div className='container'>
 					<nav className='topnav'>
 						<Link to='/'>Home</Link>
 						<Link to='/graph'>Graph</Link>
+						<Link to='/map'>Map</Link>
 					</nav>
 
-					<div id='root'>
+					<div className='root'>
 						<Route exact path='/' component={Greeting} />
 						<Route exact path='/graph' component={Dashboard} />
 					</div>

@@ -2,8 +2,8 @@ import React from 'react';
 
 const Greeting = () => {
 	return (
-		<div>
-			<h1 className='greeting'>
+		<div className='greeting'>
+			<h1>
 				Welcome to READI - Real Estate Analytics of Data and
 				Information!
 			</h1>

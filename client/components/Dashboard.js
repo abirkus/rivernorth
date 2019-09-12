@@ -4,23 +4,14 @@ const chartIcon = 'https://image.flaticon.com/icons/svg/190/190766.svg';
 import Sidebar from './Sidebar.js';
 
 export default class Dashboard extends Component {
-	// constructor() {
-	// 	super();
-	// 	this.state = {
-	// 		data: managerData,
-	// 		labels: yearLabels,
-	// 	};
-	// }
-
 	render() {
-		// const {data, labels} = this.state;
 		return (
-			<div>
+			<div className='dashboard'>
 				<div className='sidebar'>
 					<Sidebar />
 				</div>
 				<div className='graph'>
-					<header>
+					<header className='graphHeader'>
 						<h1>
 							<span>
 								<img
@@ -33,7 +24,9 @@ export default class Dashboard extends Component {
 							Dashboard
 						</h1>
 					</header>
-					<LineGraph />
+					<div className='visualGraph'>
+						<LineGraph />
+					</div>
 				</div>
 			</div>
 		);

@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
 
 body {
-	margin: 0;
-	padding: 0;
 	font-family: 'PT Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #6610f2;
 	color: white;
 }
+#app {
+	margin: 0;
+}
 
-.topnav {
+/* .topnav {
 	grid-area: header;
 }
 .root {
@@ -21,21 +22,23 @@ body {
 }
 .item-d {
 	grid-area: footer;
-}
+} */
 
 .container {
 	display: grid;
-	width: 100vw;
-	height: 100vh;
+	height: 100ch;
+	width: inherit;
+	max-width: inherit;
 	grid-template-columns: 25% 25% 25% 25%;
 	grid-template-rows: 5% 20% 25% 25% 25%;
-	grid-template-areas:
+	/* grid-template-areas:
 		'header header header header'
 		'main main . sidebar'
 		'main main . sidebar'
-		'footer footer footer footer';
-	justify-content: center;
-	align-content: center;
+		'footer footer footer footer'; */
+	/* justify-content: center;
+	align-content: center; */
+	margin: 0;
 }
 
 .topnav {
@@ -43,13 +46,13 @@ body {
 	grid-column-end: 4;
 	grid-row-start: 1;
 	grid-row-end: 2;
-	width: 100%;
+
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	background-color: #333;
 	display: grid;
-	grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
+	grid-template-columns: 25% 50% 25%;
 }
 
 .topnav a {
@@ -65,30 +68,79 @@ body {
 }
 
 .root {
-	grid-column-start: 2;
-	grid-column-end: 4;
+	grid-column-start: 1;
+	grid-column-end: 5;
 	grid-row-start: 2;
-	grid-row-end: 4;
-	align-items: stretch;
+	grid-row-end: 5;
 }
 
 .greeting {
 	text-align: center;
 }
 
+.dashboard {
+	display: grid;
+	/* width: 100vw; */
+	height: auto;
+	grid-template-columns: [first] 5% [line2] 35% [line3] 20% [line4] 20% [five] 20% [end];
+	/* grid-template-columns: 20% 20% 20% 20% 20%; */
+	/* grid-template-rows: 25% 50% 25%; */
+	grid-template-rows: [row1-start] 25% [row1-end] 50% [third-line] 25% [last-line];
+	grid-auto-flow: row;
+	grid-gap: 10px;
+}
+/* 
+As the short-shorthand for grid-row-start + grid-column-start + grid-row-end + grid-column-end: */
+.sidebar {
+	grid-area: row1-start / five / last-line / end;
+	background-color: #333;
+	/* border-right: 1px solid gray; */
+	text-align: center;
+	padding: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+	width: 10vw;
+}
+
+.sidebar img {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 5px;
+	width: 9vw;
+}
+
+.sidebar section {
+	text-align: left;
+	padding: 10px;
+}
+
+.sidebar a {
+	transition: border 0.2s ease;
+	cursor: pointer;
+}
+
+.sidebar a:hover {
+	border-bottom: 2px solid #00aaaa;
+}
+
+.graph {
+	grid-area: row1-start / line2 / last-line / five;
+}
+
 .graphContainer {
-	/* width: 50vw;
-	height: 50vh; */
 	background: white;
 	padding: 30px 20px 10px 20px;
 	border-radius: 10px;
 	-webkit-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
+	width: 70vw;
 }
 
 @media only screen and (max-width: 600px) {
 	.graphContainer {
-		width: 80vw;
+		width: 70vw;
 	}
 }

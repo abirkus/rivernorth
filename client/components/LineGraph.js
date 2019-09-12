@@ -21,15 +21,15 @@ class LineGraph extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.apts);
+		//console.log(this.props.apts);
 		const labels2 = this.props.apts.map(apt => {
 			return apt['ClosedDate'];
 		});
-		console.log('LABELS', labels2);
+		//console.log('LABELS', labels2);
 		const profit = this.props.apts.map(apt => {
 			return apt['BiddersProfit'];
 		});
-		console.log('PROFIT', profit);
+		//console.log('PROFIT', profit);
 		const myChartRef = this.chartRef.current.getContext('2d');
 
 		new Chart(myChartRef, {
@@ -48,6 +48,11 @@ class LineGraph extends Component {
 			// },
 		});
 	}
+
+	handleAskBid() {}
+
+	handleTends() {}
+
 	render() {
 		return (
 			<div className='graphContainer'>

@@ -1,14 +1,14 @@
 /* eslint-disable no-new */
 import React, {Component} from 'react';
 import Chart from 'chart.js';
-
+import {connect} from 'react-redux';
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
 //Chart.defaults.global.legend.display = false;
 Chart.defaults.global.elements.line.tension = 0;
 //--Chart Style Options--//
 
-export default class LineGraph extends Component {
+class LineGraph extends Component {
 	constructor() {
 		super();
 		this.chartRef = React.createRef();
@@ -21,22 +21,31 @@ export default class LineGraph extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props.apts);
+		const labels2 = this.props.apts.map(apt => {
+			return apt['ClosedDate'];
+		});
+		console.log('LABELS', labels2);
+		const profit = this.props.apts.map(apt => {
+			return apt['BiddersProfit'];
+		});
+		console.log('PROFIT', profit);
 		const myChartRef = this.chartRef.current.getContext('2d');
 
 		new Chart(myChartRef, {
-			type: 'scatter',
+			type: 'line',
 			data: {
-				labels: this.props.labels,
+				labels: labels2,
 				datasets: [
 					{
 						label: 'Bidder Profit',
-						data: this.props.data,
+						data: profit,
 					},
 				],
 			},
-			options: {
-				//Customize chart options
-			},
+			// options: {
+			// 	//Customize chart options
+			// },
 		});
 	}
 	render() {
@@ -47,3 +56,11 @@ export default class LineGraph extends Component {
 		);
 	}
 }
+
+const mapStateToProps = state => {
+	return {
+		apts: state,
+	};
+};
+
+export default connect(mapStateToProps)(LineGraph);

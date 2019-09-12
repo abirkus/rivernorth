@@ -26,7 +26,7 @@ export default class Dashboard extends Component {
 								height='45'
 							/>{' '}
 						</span>
-						Sales Dashboard
+						Dashboard
 					</h1>
 				</header>
 				<LineGraph data={data} labels={labels} />

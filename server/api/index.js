@@ -3,7 +3,7 @@ const {Apartment} = require('../db');
 
 router.get('/apartments', async (req, res, next) => {
 	try {
-		const result = await Apartment.findAll({limit: 1});
+		const result = await Apartment.findAll({limit: 10});
 		res.json(result);
 	} catch (err) {
 		next(err);

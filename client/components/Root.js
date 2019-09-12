@@ -9,8 +9,6 @@ import {fetchApartments} from '../redux/reducer.js';
 class Root extends React.Component {
 	componentDidMount() {
 		try {
-			console.log(this.props);
-
 			this.props.fetchApartments();
 		} catch (err) {
 			console.error(err);

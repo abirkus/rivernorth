@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const SET_APTS = 'SET_APTS';
+export const SET_APTS = 'SET_APTS';
 
-const setApts = apts => {
+export const setApts = apts => {
 	return {
 		type: SET_APTS,
 		apts,
@@ -13,9 +13,7 @@ const setApts = apts => {
 export const fetchApartments = () => {
 	return async dispatch => {
 		try {
-			console.log('Thunk');
-			const {data} = await axios.get('/api/apartments');
-			console.log('Thunk', data);
+			const {data} = await axios.get('/api');
 			dispatch(setApts(data));
 		} catch (err) {
 			console.log('Error', err);
@@ -26,7 +24,7 @@ export const fetchApartments = () => {
 const initialState = [];
 
 //reducer
-const appReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
 	switch (action.type) {
 		case SET_APTS: {
 			return action.apts;
@@ -36,5 +34,3 @@ const appReducer = (state = initialState, action) => {
 		}
 	}
 };
-
-export default appReducer;

@@ -5,6 +5,7 @@ import Greeting from './Greeting';
 require('babel-polyfill');
 import Dashboard from './Dashboard';
 import {fetchApartments} from '../redux/reducer.js';
+import Mymap from './Mymap';
 
 class Root extends React.Component {
 	componentDidMount() {
@@ -28,6 +29,7 @@ class Root extends React.Component {
 					<div className='root'>
 						<Route exact path='/' component={Greeting} />
 						<Route exact path='/graph' component={Dashboard} />
+						<Route exact path='/map' component={Mymap} />
 					</div>
 				</div>
 			</Router>

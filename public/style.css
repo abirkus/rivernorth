@@ -144,3 +144,12 @@ As the short-shorthand for grid-row-start + grid-column-start + grid-row-end + g
 		width: 70vw;
 	}
 }
+
+.neighborhoods {
+	display: flex;
+	flex-direction: column;
+}
+
+.neighborhoods a {
+	font-size: fit-width;
+}

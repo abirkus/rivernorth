@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import LineGraph from './LineGraph';
 const chartIcon = 'https://image.flaticon.com/icons/svg/190/190766.svg';
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import Mymap from './Mymap';
 import Sidebar from './Sidebar.js';
 
 export default class Dashboard extends Component {
@@ -25,7 +27,10 @@ export default class Dashboard extends Component {
 						</h1>
 					</header>
 					<div className='visualGraph'>
-						<LineGraph />
+						<Switch>
+							<Route exact path='/graph' component={LineGraph} />
+							<Route exact path='/map' component={Mymap} />
+						</Switch>
 					</div>
 				</div>
 			</div>

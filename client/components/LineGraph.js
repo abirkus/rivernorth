@@ -2,7 +2,12 @@
 import React, {Component} from 'react';
 import Chart from 'chart.js';
 import {connect} from 'react-redux';
-import {getProfitThunk, getPriceSqFtThunk} from '../redux/reducer';
+import {
+	getProfitThunk,
+	getPriceSqFtThunk,
+	fetchApartments,
+} from '../redux/reducer';
+import FilterComponent from './filterComponent';
 let myLineChart;
 //import * as d3 from "d3";
 
@@ -31,33 +36,27 @@ class LineGraph extends Component {
 		};
 	}
 	componentDidMount() {
-		console.log('mount');
-		console.log(this.state);
 		this.buildChart();
 	}
 
 	componentDidUpdate() {
-		console.log('updating');
 		this.buildChart();
 	}
 
 	handleClick(evt) {
 		let data;
 		if (Number(evt.target.id) === 1) {
-			console.log('EVENT ID', evt.target.id);
 			this.props.getDealProfit(this.props.apts);
 			data = this.props.apts.map(apt => {
 				return {x: new Date(apt.ClosedDate), y: apt.buyerProfit};
 			});
-			console.log('changing state');
+
 			this.setState({
 				priceData: data,
 				title: `Buyer's Profit`,
 			});
-			console.log('new state');
-			console.log(this.state);
 		} else if (Number(evt.target.id) === 2) {
-			console.log('EVENT ID', evt.target.id);
+			this.props.getHousePriceIndex();
 			data = this.props.apts.map(apt => {
 				return {x: new Date(apt.ClosedDate), y: apt.SoldPrice};
 			});
@@ -68,11 +67,17 @@ class LineGraph extends Component {
 		} else if (Number(evt.target.id) === 3) {
 			this.props.getPriceSqFt(this.props.apts);
 
-			console.log('TEST number 3', this.props.apts);
-
-			data = this.props.apts.map(apt => {
-				return {x: new Date(apt.ClosedDate), y: apt.PriceSqFt};
-			});
+			data = this.props.apts.reduce((accum, curr) => {
+				if (Number(curr.ApproxSqFt) !== 0) {
+					curr = {x: new Date(curr.ClosedDate), y: curr.PriceSqFt};
+					if (!accum) {
+						accum = [curr];
+					} else {
+						accum.push(curr);
+					}
+				}
+				return accum;
+			}, []);
 			this.setState({
 				priceData: data,
 				title: `Price per Square Foot`,
@@ -81,7 +86,6 @@ class LineGraph extends Component {
 	}
 
 	buildChart() {
-		console.log('building');
 		const myChartRef = this.chartRef.current.getContext('2d');
 
 		if (typeof myLineChart !== 'undefined') myLineChart.destroy();
@@ -112,7 +116,7 @@ class LineGraph extends Component {
 			'Nov',
 			'Dec',
 		];
-		console.log(this.state);
+
 		const dataByMonth = this.state.priceData.reduce((accum, curr) => {
 			let date = new Date(curr.x);
 			let value = curr.y;
@@ -198,7 +202,7 @@ class LineGraph extends Component {
 	render() {
 		return (
 			<div>
-				<div onClick={id => this.handleClick(id)}>
+				<div onClick={id => this.handleClick(id)} className='charttabs'>
 					<button type='button' id='1'>
 						Get deal profit
 					</button>
@@ -208,9 +212,16 @@ class LineGraph extends Component {
 					<button type='button' id='3'>
 						Get price per Square Foot
 					</button>
+
+					<button type='button' id='4' className='filter'>
+						Filter
+					</button>
 				</div>
 				<div className='graphContainer'>
 					<canvas id='myChart' ref={this.chartRef} />
+				</div>
+				<div>
+					<FilterComponent />
 				</div>
 			</div>
 		);
@@ -227,6 +238,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getDealProfit: apts => dispatch(getProfitThunk(apts)),
 		getPriceSqFt: apts => dispatch(getPriceSqFtThunk(apts)),
+		getHousePriceIndex: () => dispatch(fetchApartments()),
 	};
 };
 export default connect(

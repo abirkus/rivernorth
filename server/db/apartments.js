@@ -15,7 +15,7 @@ const Apartment = db.define('apartment', {
 	ZipCode: Sequelize.STRING,
 	SoldPrice: Sequelize.STRING,
 	ListPrice: Sequelize.STRING,
-	ClosedDate: Sequelize.STRING,
+	ClosedDate: Sequelize.DATE,
 	ListDate: Sequelize.STRING,
 	ListDateReceived: Sequelize.STRING,
 	OffMarketDate: Sequelize.STRING,

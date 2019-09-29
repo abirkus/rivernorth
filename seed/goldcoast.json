@@ -24740,27 +24740,6 @@
         "Beds\r": 1
     },
     {
-        "MLS": 9024053,
-        "Status": "CLSD",
-        "SearchPrice": 180000,
-        "NumberOfRooms": 4,
-        "Bedrooms ": 1,
-        "FullBaths": 1,
-        "ApproxYearBuilt": "UNK",
-        "ApproxSqFt": 745,
-        "Taxes": 2525.04,
-        "Assessment": 538,
-        "ZipCode": 60010,
-        "SoldPrice": 180000,
-        "ListPrice": 199900,
-        "ClosedDate": "12/3/15",
-        "ListDate": "8/28/15",
-        "ListDateReceived": "8/28/15",
-        "OffMarketDate": "11/10/15",
-        "StatusDate": "12/3/15",
-        "Beds\r": 1
-    },
-    {
         "MLS": 9032073,
         "Status": "CLSD",
         "SearchPrice": 190000,

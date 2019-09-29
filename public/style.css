@@ -134,15 +134,15 @@ As the short-shorthand for grid-row-start + grid-column-start + grid-row-end + g
 	max-width: 90vw;
 	position: relative;
 	background: white;
-	padding: 30px 10px 10px 10px;
-	border-radius: 10px;
+	padding: 30px 20px 10px 20px;
+	border-radius: 0px 0px 10px 10px;
 	-webkit-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 10px 0px -5px rgba(0, 0, 0, 0.3);
 }
 
 canvas {
-	width: 100%;
+	width: inherit;
 	max-width: 90vw;
 	height: auto;
 	position: inherit;
@@ -172,10 +172,68 @@ canvas {
 	align-self: stretch;
 	align-items: stretch;
 	flex: 1 100%;
+	border-radius: 10px 10px 0px 0px;
 }
 
 .charttabs .filter {
 	align-self: stretch;
 	align-items: stretch;
 	flex: 1 100%;
+}
+
+.filterComponent {
+	position: absolute;
+
+	top: 1%;
+	right: 1%;
+	width: 97%;
+	height: 96%;
+	border: 3px solid #f1f1f1;
+	z-index: 9;
+	color: black;
+	background-color: white;
+}
+
+.slidecontainer {
+	display: flex;
+	width: -webkit-fill-available;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.box-minmax {
+	width: -webkit-fill-available;
+	display: flex;
+	justify-content: space-between;
+	font-size: 10px;
+	color: black;
+}
+
+.slider {
+	width: -webkit-fill-available;
+}
+.box-mimaxspan span:first-child {
+	margin-left: 10px;
+}
+
+.datecontainer {
+	display: flex;
+
+	flex-direction: row;
+	align-items: center;
+	justify-content: left;
+}
+
+.start {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.end {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
 }

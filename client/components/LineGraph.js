@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable no-new */
 import React, {Component} from 'react';
 import Chart from 'chart.js';
@@ -6,6 +7,7 @@ import {
 	getProfitThunk,
 	getPriceSqFtThunk,
 	fetchApartments,
+	fetchHousePriceIndex,
 } from '../redux/reducer';
 import FilterComponent from './filterComponent';
 let myLineChart;
@@ -20,7 +22,7 @@ class LineGraph extends Component {
 		this.chartRef = React.createRef();
 		this.handleClick = this.handleClick.bind(this);
 		this.buildChart = this.buildChart.bind(this);
-
+		// this.toggleFilter = this.toggleFilter.bind(this);
 		// In the typical React dataflow, props are the only way that parent components interact with their children.
 		// To modify a child, you re-render it with new props. However, there are a few cases where you need to imperatively modify a child outside of the typical dataflow.
 		// The child to be modified could be an instance of a React component, or it could be a DOM element. For both of these cases, React provides an escape hatch.
@@ -33,15 +35,26 @@ class LineGraph extends Component {
 		this.state = {
 			priceData: arr,
 			title: `House Price Index`,
+			filterOn: false,
 		};
 	}
 	componentDidMount() {
+		let obj = new Set();
+		this.props.apts.forEach(apt => {
+			if (!obj.has(apt.ZipCode)) {
+				obj.add(apt.ZipCode);
+			}
+		});
+
+		console.log(obj);
 		this.buildChart();
 	}
 
 	componentDidUpdate() {
 		this.buildChart();
 	}
+
+	// toggleFilter() {}
 
 	handleClick(evt) {
 		let data;
@@ -81,6 +94,10 @@ class LineGraph extends Component {
 			this.setState({
 				priceData: data,
 				title: `Price per Square Foot`,
+			});
+		} else if (Number(evt.target.id) === 4) {
+			this.setState({
+				filterOn: !this.state.filterOn,
 			});
 		}
 	}
@@ -158,6 +175,16 @@ class LineGraph extends Component {
 						time: {parser: 'YYYY/MM/DD'},
 					},
 				],
+				yAxes: [
+					{
+						ticks: {
+							// Include a dollar sign in the ticks
+							callback: function(value, index, values) {
+								return '$' + value;
+							},
+						},
+					},
+				],
 			},
 			title: {
 				display: true,
@@ -219,9 +246,14 @@ class LineGraph extends Component {
 				</div>
 				<div className='graphContainer'>
 					<canvas id='myChart' ref={this.chartRef} />
-				</div>
-				<div>
-					<FilterComponent />
+
+					{this.state.filterOn ? (
+						<div>
+							<FilterComponent filterOff={this.handleClick} />
+						</div>
+					) : (
+						<div />
+					)}
 				</div>
 			</div>
 		);
@@ -238,7 +270,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getDealProfit: apts => dispatch(getProfitThunk(apts)),
 		getPriceSqFt: apts => dispatch(getPriceSqFtThunk(apts)),
-		getHousePriceIndex: () => dispatch(fetchApartments()),
+		getHousePriceIndex: () => dispatch(fetchHousePriceIndex()),
 	};
 };
 export default connect(

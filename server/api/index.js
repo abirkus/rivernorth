@@ -21,30 +21,68 @@ router.get('/apartments', async (req, res, next) => {
 	}
 });
 
-const Op = Sequelize.Op;
+router.put('/apartments/custom', async (req, res, next) => {
+	let start = req.body.dateStart;
+	let end = req.body.dateEnd;
+	let limit = req.body.limit;
 
-router.get('/apartments/filter', async (req, res, next) => {
-	let whereConditions = {};
-	let orderConditions = [];
-	let limit = req.query.limit ? Number(req.query.limit) : 15;
-	let offset = req.query.offset ? Number(req.query.offset) : 0;
-	if (req.query.search) {
-		let search =
-			req.query.search[0].toUpperCase() + req.query.search.slice(1);
-		whereConditions.name = {[Op.substring]: search};
-	}
-	if (req.query.price) {
-		orderConditions.push(['price', req.query.price]);
-	}
+	let zip = req.body.zipcode;
+
+	// if (req.body.dateStart) {
+	// 	start = req.body.dateStart.split('-');
+	// 	let temp = start.shift().slice(2);
+	// 	start.push(temp);
+	// 	if (Number(start[0]) < 10) {
+	// 		start[0] = start[0].slice(1);
+	// 	}
+	// 	if (Number(start[1]) < 10) {
+	// 		start[1] = start[1].slice(1);
+	// 	}
+
+	// 	start = start.join('/');
+	// } else {
+	// 	start = '1/1/2007';
+	// }
+
+	// if (req.body.dateEnd) {
+	// 	end = req.body.dateEnd.split('-');
+	// 	let temp2 = end.shift().slice(2);
+	// 	end.push(temp2);
+
+	// 	if (Number(end[0]) < 10) {
+	// 		end[0] = end[0].slice(1);
+	// 	}
+	// 	if (Number(end[1]) < 10) {
+	// 		end[1] = end[1].slice(1);
+	// 	}
+	// 	end = end.join('/');
+	// } else {
+	// 	end = '9/27/2019';
+	// }
+	const Op = Sequelize.Op;
+	console.log('START _END', start, end);
 	try {
-		const items = await Item.findAll({
+		const apts = await Apartment.findAll({
 			limit,
-			offset,
-			order: orderConditions,
-			where: whereConditions,
-			subQuery: false,
+			where: {
+				ZipCode: {
+					[Op.or]: zip,
+				},
+				ClosedDate: {
+					[Op.gt]: new Date(start),
+					[Op.lt]: new Date(end),
+				},
+			},
+			attributes: [
+				'id',
+				'ClosedDate',
+				'SoldPrice',
+				'ListPrice',
+				'ZipCode',
+				'ApproxSqFt',
+			],
 		});
-		res.json(items);
+		res.json(apts);
 	} catch (err) {
 		next(err);
 	}

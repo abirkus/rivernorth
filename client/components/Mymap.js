@@ -25,27 +25,17 @@ const Mymap = () => {
 		setViewPort({...viewport, transitionDuration: 3000});
 
 	return (
-		<div style={{margin: '0 auto'}}>
-			<h1
-				style={{
-					textAlign: 'center',
-					fontSize: '25px',
-					fontWeight: 'bolder',
-				}}>
-				GeoLocator: Select your location
-			</h1>
-			<MapGL
-				{...viewport}
-				mapboxApiAccessToken={TOKEN}
-				mapStyle='mapbox://styles/mapbox/dark-v8'
-				onViewportChange={_onViewportChange}>
-				<GeolocateControl
-					style={geolocateStyle}
-					positionOptions={{enableHighAccuracy: true}}
-					trackUserLocation={true}
-				/>
-			</MapGL>
-		</div>
+		<MapGL
+			{...viewport}
+			mapboxApiAccessToken={TOKEN}
+			mapStyle='mapbox://styles/mapbox/dark-v8'
+			onViewportChange={_onViewportChange}>
+			<GeolocateControl
+				style={geolocateStyle}
+				positionOptions={{enableHighAccuracy: true}}
+				trackUserLocation={true}
+			/>
+		</MapGL>
 	);
 };
 

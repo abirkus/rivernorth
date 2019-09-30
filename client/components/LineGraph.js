@@ -1,3 +1,6 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
+/* eslint-disable no-shadow */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable no-new */
 import React, {Component} from 'react';
@@ -22,6 +25,7 @@ class LineGraph extends Component {
 		this.chartRef = React.createRef();
 		this.handleClick = this.handleClick.bind(this);
 		this.buildChart = this.buildChart.bind(this);
+		this.updateChart = this.updateChart.bind(this);
 		// this.toggleFilter = this.toggleFilter.bind(this);
 		// In the typical React dataflow, props are the only way that parent components interact with their children.
 		// To modify a child, you re-render it with new props. However, there are a few cases where you need to imperatively modify a child outside of the typical dataflow.
@@ -32,21 +36,15 @@ class LineGraph extends Component {
 		let arr = this.props.apts.map(apt => {
 			return {x: new Date(apt.ClosedDate), y: apt.SoldPrice};
 		});
+
 		this.state = {
 			priceData: arr,
 			title: `House Price Index`,
 			filterOn: false,
+			customData: {},
 		};
 	}
 	componentDidMount() {
-		let obj = new Set();
-		this.props.apts.forEach(apt => {
-			if (!obj.has(apt.ZipCode)) {
-				obj.add(apt.ZipCode);
-			}
-		});
-
-		console.log(obj);
 		this.buildChart();
 	}
 
@@ -54,7 +52,16 @@ class LineGraph extends Component {
 		this.buildChart();
 	}
 
-	// toggleFilter() {}
+	updateChart() {
+		let customObj = {};
+		console.log('KEYS', Object.keys(this.props.customData));
+		if (Object.keys(this.props.customData)) {
+			customObj = this.props.customData;
+		}
+		this.setState({
+			customData: customObj,
+		});
+	}
 
 	handleClick(evt) {
 		let data;
@@ -78,6 +85,7 @@ class LineGraph extends Component {
 				title: `House Price Index`,
 			});
 		} else if (Number(evt.target.id) === 3) {
+			console.log(this.props);
 			this.props.getPriceSqFt(this.props.apts);
 
 			data = this.props.apts.reduce((accum, curr) => {
@@ -192,41 +200,116 @@ class LineGraph extends Component {
 			},
 		};
 
-		myLineChart = new Chart(myChartRef, {
-			type: 'line',
-			data: {
-				datasets: [
-					{
+		const colors = () => {
+			return (
+				'#' +
+				(0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6)
+			);
+		};
+		let customData = this.state.customData;
+		if (!Object.keys(customData).length) {
+			myLineChart = new Chart(myChartRef, {
+				type: 'line',
+				data: {
+					datasets: [
+						{
+							type: 'scatter',
+							label: 'Price Data', // Name the series
+							data: this.state.priceData, // Specify the data values array
+							borderColor: colors(), // Add custom color border
+							backgroundColor: colors(), // Add custom color background (Points and Fill)
+							showLine: false,
+						},
+						{
+							type: 'line',
+							label: 'Monthly Median Sold Price',
+							data: medianData,
+							borderColor: colors(), // Add custom color border
+							backgroundColor: colors(),
+							fill: false,
+						},
+						{
+							type: 'line',
+							label: 'Slope of the price trend',
+							data: slopeData,
+							borderColor: colors(), // Add custom color border
+							backgroundColor: colors(),
+							fill: false,
+						},
+					],
+				},
+				options: options,
+			});
+		} else {
+			let datasets = [];
+			for (let key in customData) {
+				if (customData.hasOwnProperty(key)) {
+					let arr = customData[key].map(apt => {
+						return {x: new Date(apt.ClosedDate), y: apt.SoldPrice};
+					});
+
+					let customMonthly = arr.reduce((accum, curr) => {
+						let date = new Date(curr.x);
+						let value = curr.y;
+						let month = monthNames[date.getMonth()];
+						var year = date.getFullYear();
+						var group = month + year;
+
+						if (!accum[group]) {
+							accum[group] = [value];
+						} else {
+							accum[group].push(value);
+						}
+
+						return accum;
+					}, {});
+
+					let medianArr = [];
+					for (let key in customMonthly) {
+						if (customMonthly.hasOwnProperty(key)) {
+							medianArr.push({
+								x: new Date(key),
+								y: median(customMonthly[key]),
+							});
+						}
+					}
+					medianArr.sort((a, b) => {
+						return a.x - b.x;
+					});
+					let tempObj = {
 						type: 'scatter',
-						label: 'Price Data', // Name the series
-						data: this.state.priceData, // Specify the data values array
-						borderColor: '#2196f3', // Add custom color border
-						backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+						label: key, // Name the series
+						data: arr, // Specify the data values array
+						borderColor: colors(), // Add custom color border
+						backgroundColor: colors(), // Add custom color background (Points and Fill)
 						showLine: false,
-					},
-					{
+					};
+
+					let tempObj2 = {
 						type: 'line',
-						label: 'Monthly Median Sold Price',
-						data: medianData,
-						borderColor: '#060600', // Add custom color border
-						backgroundColor: '#060600',
+						label: `${key} Median Close Price`,
+						data: medianArr,
+						borderColor: colors(), // Add custom color border
+						backgroundColor: colors(),
 						fill: false,
-					},
-					{
-						type: 'line',
-						label: 'Slope of the price trend',
-						data: slopeData,
-						borderColor: '#060600', // Add custom color border
-						backgroundColor: '#060600',
-						fill: false,
-					},
-				],
-			},
-			options: options,
-		});
+					};
+					datasets.push(tempObj);
+					datasets.push(tempObj2);
+				}
+			}
+			myLineChart = new Chart(myChartRef, {
+				type: 'line',
+				data: {
+					datasets,
+				},
+				options: options,
+			});
+		}
 	}
 
 	render() {
+		console.log('state', this.state);
+		console.log('KEYS', Object.keys(this.props.customData));
 		return (
 			<div>
 				<div onClick={id => this.handleClick(id)} className='charttabs'>
@@ -249,7 +332,10 @@ class LineGraph extends Component {
 
 					{this.state.filterOn ? (
 						<div>
-							<FilterComponent filterOff={this.handleClick} />
+							<FilterComponent
+								filterOff={this.handleClick}
+								updateChart={this.updateChart}
+							/>
 						</div>
 					) : (
 						<div />
@@ -262,7 +348,8 @@ class LineGraph extends Component {
 
 const mapStateToProps = state => {
 	return {
-		apts: state,
+		apts: state.apts,
+		customData: state.customData,
 	};
 };
 

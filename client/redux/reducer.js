@@ -90,30 +90,42 @@ export const fetchCustomDataThunk = obj => {
 	return async dispatch => {
 		try {
 			console.log('INSIDE THUNK', obj);
+			let zipcodes = obj.zipcode;
+			let customData = {};
 			const {data} = await axios.put('/api/apartments/custom', obj);
-			dispatch(getCustomData(data));
+			zipcodes.forEach(zip => {
+				customData[zip] = [];
+			});
+			data.forEach(apt => {
+				customData[apt.ZipCode].push(apt);
+			});
+
+			dispatch(getCustomData(customData));
 		} catch (err) {
 			console.log('Error', err);
 		}
 	};
 };
 
-const initialState = [];
+const initialState = {
+	apts: [],
+	customData: {},
+};
 
 //reducer
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case SET_APTS: {
-			return action.apts;
+			return {...state, apts: action.apts};
 		}
 		case GET_DEAL_PROFIT: {
-			return action.apts;
+			return {...state, apts: action.apts};
 		}
 		case GET_PRICE_SQFT: {
-			return action.apts;
+			return {...state, apts: action.apts};
 		}
 		case GET_CUSTOM_DATA: {
-			return action.apts;
+			return {...state, customData: action.apts};
 		}
 		default: {
 			return state;

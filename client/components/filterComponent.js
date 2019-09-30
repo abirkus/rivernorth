@@ -59,7 +59,7 @@ class filterComponent extends Component {
 		}
 	}
 
-	handleSubmit(evt) {
+	async handleSubmit(evt) {
 		evt.preventDefault();
 		let obj = {};
 		if (this.state.limit) {
@@ -92,13 +92,19 @@ class filterComponent extends Component {
 			obj.dateEnd = this.state.dateEnd;
 		}
 
-		this.props.fetchCustom(obj);
+		try {
+			await this.props.fetchCustom(obj);
+		} catch (err) {
+			console.log(err);
+		}
+
 		let newObj = {
 			target: {
 				id: 4,
 			},
 		};
 		this.props.filterOff(newObj);
+		this.props.updateChart();
 
 		obj = {};
 	}

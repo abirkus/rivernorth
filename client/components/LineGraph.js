@@ -54,7 +54,6 @@ class LineGraph extends Component {
 
 	updateChart() {
 		let customObj = {};
-		console.log('KEYS', Object.keys(this.props.customData));
 		if (Object.keys(this.props.customData)) {
 			customObj = this.props.customData;
 		}
@@ -85,7 +84,6 @@ class LineGraph extends Component {
 				title: `House Price Index`,
 			});
 		} else if (Number(evt.target.id) === 3) {
-			console.log(this.props);
 			this.props.getPriceSqFt(this.props.apts);
 
 			data = this.props.apts.reduce((accum, curr) => {
@@ -158,7 +156,6 @@ class LineGraph extends Component {
 			return accum;
 		}, {});
 
-		console.log(dataByMonth);
 		let medianData = [];
 		for (let key in dataByMonth) {
 			if (dataByMonth.hasOwnProperty(key)) {
@@ -308,8 +305,6 @@ class LineGraph extends Component {
 	}
 
 	render() {
-		console.log('state', this.state);
-		console.log('KEYS', Object.keys(this.props.customData));
 		return (
 			<div>
 				<div onClick={id => this.handleClick(id)} className='charttabs'>
@@ -357,7 +352,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getDealProfit: apts => dispatch(getProfitThunk(apts)),
 		getPriceSqFt: apts => dispatch(getPriceSqFtThunk(apts)),
-		getHousePriceIndex: () => dispatch(fetchHousePriceIndex()),
+		getHousePriceIndex: () => dispatch(fetchApartments()),
 	};
 };
 export default connect(

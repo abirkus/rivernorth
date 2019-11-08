@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "just-genius-254818",
+  "private_key_id": "ba6605fcd615f52b4fad258679bcb450b66c1f19",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDzJFXuSpVkO0U7\nYbHyenTj114EbGVNvHqVKWeiMggR1daM6aNvU5j8gU+Rg+cnc+Va76qktJSBTKNR\ncPJKu6QqKD5KC43ivqCq9eAm70c0dSY1Yl1cuVl3WEUXFFvb6Trrgv8RpzhLiFDg\nxuSx2Cljv/XhfRQUdumC4cOA0zQ1X9VZIC/AvBb/RUaeW276O51Kzbt/ONW90fwf\n20VoHh1dMx5BCP2Ftp3O+WeOYVoSyimR/lr2nBR9OBDHzttpiGGaXriSZ6uxzwKq\nIdiXK2T4whaBZ+trHiTKvBz+FhyGmXJh79VGPSOn+f6NjMF8k00EvsAsSiSuYSba\nmfNfSV/TAgMBAAECggEAeFEmPrVkqMVVtJVbF8j2N9sWuKylEqsuo8pp8I6+hIjj\nUza4e/oLzgP1SmZRyCmnOPE5aai8hiFU/hOcqlOhYIUqkbyW+TnoysDCK7Ijc7d2\n8VrcJWrI9XBWPB4EeNW4pNtdejBcALCTiS+S8tirXqOaunsJKTlQw0YR1xlsj+4F\n8CMcRMtjrzii/Ty1xveBmaijeL4SusTf1bT3yiQw3TToi26kth8gAJmZIDyxPcUQ\nuy7TSka1gT194MbtjVyBrPxuSJO/lLF8tEJAPwnI8dolM73S+3/IjObpW57RM/Z9\nqQBy3HKddOdX6Tdvs9d4s6kPZaCA0qXzcnrG8Wp51QKBgQD+Ss4cj5UcaT+4L5fC\nJTZgR2QBtIdShuHyxWIBXAIeToVoM+GMkBo4xYG2DBPyrIq4N519sl3SCXa36f0v\nVkbiffj3gQ1T34NdgTg63A3ctMEWz14wT8Pgks35EHN/ziQ6eb+PgJND8n894yNK\nKSWNy7d+l9K6lgYGm413hGBv/QKBgQD0xlw9Lg19a8aFz0fDFFOXeZrjJ/9wvo1o\nFhhdjiXpMDibyDVGJTEuGCY0MTTw8Puij6Eo2VRcKaX0Z2PLtBJn3yMDjaP9scXB\nVbXTKWtPYLuRhMJKSj1c6Kk0pad34MEUsFfOSNC7W5gmjO8LsxejFpTn9MeQh2RZ\nX9FwUx8QDwKBgQCKGAmSTQ8G3MkztvTNA/RhmKNgoa8TTBiMBFDSuCqWVsHv8qy7\n7s2uouNr/2cd1EGJBPrL9f8pPuZvvew2tr3L5ek8T6LzN2BZeQEWRcZpYuexAW//\nAHI5FMAyT5LJhyL5doBm58YRkjEzZJQXg/zW4hiF8OEJXstq7zKGAydz6QKBgAwl\nW6ZdhqXWlz9EjdcMRymZCyqCbZZ2niWwEv1xdEgh8G0qfhpA9jPHVv34AxyBmLr0\nTZbtUdZQ6r858iXFhbRJyj7+5EhObfWt/xu/Tmfd8PDDmbB+BpV5pgvKvIiiSnJw\nXasKyfDCFsay75mxBVc+Y50u9Egjr8MPkiD0vvHZAoGAajw7/10ylUVmCeSTBW0C\nN+0eXWjSdOZU2GUohrY/cbGVa1a2D2ZZDIFDv+AW/lLW+jQhicI7y6yF6joh1WeV\nj49G932LXXLUckTTxZTjR/Naa6fvKGYQDcLlrAoAWMrUkofLBHE/Wnjbd/p07xn1\nhQABfIaIunb2yFfEe9MVtNk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "jaam-sounds@just-genius-254818.iam.gserviceaccount.com",
+  "client_id": "110528671405784888654",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jaam-sounds%40just-genius-254818.iam.gserviceaccount.com"
+}

@@ -5,6 +5,12 @@ const Sequelize = require('sequelize');
 router.get('/apartments', async (req, res, next) => {
 	try {
 		const result = await Apartment.findAll({
+			limit: 100,
+			// where: {
+			// 	ZipCode: {
+			// 		[Op.or]: ['60661'],
+			// 	},
+			// },
 			attributes: [
 				'id',
 				'ClosedDate',
@@ -13,7 +19,6 @@ router.get('/apartments', async (req, res, next) => {
 				'ZipCode',
 				'ApproxSqFt',
 			],
-			limit: 100,
 		});
 		res.json(result);
 	} catch (err) {
@@ -38,7 +43,6 @@ router.put('/apartments/custom', async (req, res, next) => {
 		end = '2019-09-27';
 	}
 
-	console.log('START _END', start, end);
 	try {
 		const apts = await Apartment.findAll({
 			limit,

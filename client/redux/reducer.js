@@ -89,7 +89,6 @@ export const getPriceSqFtThunk = apts => {
 export const fetchCustomDataThunk = obj => {
 	return async dispatch => {
 		try {
-			console.log('INSIDE THUNK', obj);
 			let zipcodes = obj.zipcode;
 			let customData = {};
 			const {data} = await axios.put('/api/apartments/custom', obj);

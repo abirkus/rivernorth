@@ -11,19 +11,6 @@ body {
 	margin: 0;
 }
 
-/* .topnav {
-	grid-area: header;
-}
-.root {
-	grid-area: main;
-}
-.sidebar {
-	grid-area: sidebar;
-}
-.item-d {
-	grid-area: footer;
-} */
-
 .container {
 	display: grid;
 	height: 100ch;

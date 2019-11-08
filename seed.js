@@ -6,10 +6,6 @@ const seedDataGoldCoast = require('./seed/goldcoast');
 const seedDataLoganSquare = require('./seed/logansquare');
 const seedDataUkrainianVillage = require('./seed/ukrainianvillage');
 
-// const seed = () => {
-// 	console.log('TEST', seedData[0]);
-// };
-
 const seed = async () => {
 	try {
 		await db.sync({force: true});
